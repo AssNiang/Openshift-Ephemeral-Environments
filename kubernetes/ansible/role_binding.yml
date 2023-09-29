@@ -1,0 +1,41 @@
+---
+- name: k8s role and role binding
+  hosts: all
+  tasks:
+    - name: create a role
+      kubernetes.core.k8s:
+        state: "{{ state }}"
+        namespace: ansible-examples  
+        definition:
+          apiVersion: rbac.authorization.k8s.io/v1
+          kind: Role
+          metadata:
+            namespace: ansible-examples
+            name: pod-reader
+          rules:
+          - apiGroups: [""] # "" indicates the core API group
+            resources: ["pods"]
+            verbs: ["get", "watch", "list"]
+    
+    - name: make a role binding
+      kubernetes.core.k8s:
+        state: "{{ state }}"
+        namespace: ansible-examples  
+        definition:
+          apiVersion: rbac.authorization.k8s.io/v1
+          # This role binding allows "devoloper" to read pods in the "ansible-examples" namespace.
+          # You need to already have a Role named "pod-reader" in that namespace.
+          kind: RoleBinding
+          metadata:
+            name: read-pods
+            namespace: ansible-examples
+          subjects:
+          # You can specify more than one "subject"
+          - kind: User
+            name: developer # "name" is case sensitive
+            apiGroup: rbac.authorization.k8s.io
+          roleRef:
+            # "roleRef" specifies the binding to a Role / ClusterRole
+            kind: Role #this must be Role or ClusterRole
+            name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+            apiGroup: rbac.authorization.k8s.io
