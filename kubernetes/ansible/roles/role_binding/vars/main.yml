@@ -1,0 +1,4 @@
+---
+# vars file for role_binding
+state:
+ns_name:

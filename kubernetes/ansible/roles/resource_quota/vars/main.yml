@@ -1,0 +1,4 @@
+---
+# vars file for resource_quota
+state:
+ns_name:

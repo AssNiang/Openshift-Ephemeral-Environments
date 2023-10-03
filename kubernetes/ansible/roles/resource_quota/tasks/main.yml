@@ -1,0 +1,21 @@
+---
+# tasks file for resource_quota
+- name: set the resource quota
+  kubernetes.core.k8s:
+    state: "{{ state }}"
+    namespace: "{{ ns_name }}"
+    definition:
+      apiVersion: v1
+      kind: ResourceQuota
+      metadata:
+        name: pods-low
+      spec:
+        hard:
+          cpu: "5"
+          memory: 10Gi
+          pods: "10"
+        scopeSelector:
+          matchExpressions:
+          - operator : In
+            scopeName: PriorityClass
+            values: ["low"]

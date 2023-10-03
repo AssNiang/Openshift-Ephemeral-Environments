@@ -8,5 +8,5 @@ variable "config_path" {
 }
 variable "config_context" {
   type = string
-  default = "default/api-crc-testing:6443/kubeadmin"
+  default = "crc-admin"
 }

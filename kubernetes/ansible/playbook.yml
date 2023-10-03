@@ -1,0 +1,7 @@
+- name: Create openshift objects
+  hosts: all
+  roles:
+    - namespace
+    - limit_range
+    - resource_quota
+    - role_binding
