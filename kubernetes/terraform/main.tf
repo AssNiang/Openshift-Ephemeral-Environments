@@ -7,23 +7,28 @@ provider "kubernetes" {
 }
 
 module "schedule_terraform_destroy" {
-  source = "./modules/tf_destroy"
-  duration = var.duration
-  units = var.units
+    count = terraform.workspace == var.test_workspace ? 1 : 0    
+    source = "./modules/tf_destroy"
+    duration = var.duration
+    units = var.units
 }
 
 module "create_namespace" {
-  source = "./modules/create_ns"
+    count = terraform.workspace == var.test_workspace ? 1 : 0
+    source = "./modules/create_ns"
 }
 
 module "create_limit_range" {
-  source = "./modules/create_lr"
+    count = terraform.workspace == var.test_workspace ? 1 : 0
+    source = "./modules/create_lr"
 }
 
 module "create_resource_quota" {
-  source = "./modules/create_rq"
+    count = terraform.workspace == var.test_workspace ? 1 : 0
+    source = "./modules/create_rq"
 }
 
 module "create_role_and_role_binding" {
-  source = "./modules/create_role_and_rb"
+    count = terraform.workspace == var.test_workspace ? 1 : 0
+    source = "./modules/create_role_and_rb"
 }

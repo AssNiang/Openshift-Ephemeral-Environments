@@ -10,6 +10,10 @@ variable "config_context" {
   type = string
   default = "crc-admin"
 }
+variable "test_workspace" {
+  type = string
+  default = "test"
+}
 
 variable "duration" {}
 variable "units" {}
