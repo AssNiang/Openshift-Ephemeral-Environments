@@ -2,8 +2,7 @@
 # tasks file for schedule_destruction
 - name: Destroying openshift objects in {{ count }} {{ units }}
   ansible.posix.at:
-    command:  ansible-playbook -i inventory playbook.yml -e state=absent -e ns_name={{ ns_name }}
+    command:  ansible-playbook -i inventory playbook.yml -e state=absent -e ns_name={{ ns_name }} -e count={{count}} -e units={{units}}
     count: "{{ count }}"
     units: "{{units}}"
     unique: true
-    state: present

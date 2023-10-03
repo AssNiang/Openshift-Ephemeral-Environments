@@ -13,7 +13,7 @@
         hard:
           cpu: "5"
           memory: 10Gi
-          pods: "10"
+          pods: "5"
         scopeSelector:
           matchExpressions:
           - operator : In
