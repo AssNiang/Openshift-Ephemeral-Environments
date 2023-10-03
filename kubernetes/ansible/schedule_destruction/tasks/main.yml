@@ -6,4 +6,4 @@
     count: "{{ count }}"
     units: "{{units}}"
     unique: true
-
+    state: present

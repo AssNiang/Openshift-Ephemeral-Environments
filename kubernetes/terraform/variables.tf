@@ -10,3 +10,6 @@ variable "config_context" {
   type = string
   default = "crc-admin"
 }
+
+variable "duration" {}
+variable "units" {}

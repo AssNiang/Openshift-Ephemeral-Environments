@@ -1,0 +1,2 @@
+variable "duration" {}
+variable "units" {}
